@@ -1,0 +1,14 @@
+version: '3'
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Pass1234"
+      MSSQL_DB: "example_db"
+    ports:
+      - "1433:1433"
+    command: ["/startup.sh"]
+    volumes:
+      - ./docker/mssql/startup.sh:/startup.sh
+      - ./docker/mssql/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
